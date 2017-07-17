@@ -1,23 +1,23 @@
 module.exports = function(sequelize, Sequelize) {
-    var appointment = sequelize.define('appointment', {
+    var Appointment = sequelize.define('Appointment', {
         id: {
             autoIncrement: true,
             primaryKey: true,
             type: Sequelize.INTEGER
         },
 
-        description: {
-            type: Sequelize.STRING,
+        date:{
+            type:Sequelize.DATE
         },
 
-        time: {
-            type: Sequelize.DATE,
-            validate: {
-                allowNull: false
-            }
+        time:{
+            type:Sequelize.STRING
+        },
+
+        description:{
+            type:Sequelize.STRING
         }
+});
 
-    });
-
-    return appointment;
-}
+    return Appointment;
+};
