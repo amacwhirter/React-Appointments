@@ -8,24 +8,21 @@ import css from "../../public/css/main.scss";
 
 class TableAppointments extends Component {
 
-	constructor() {
-			super();
-			this.state = { data: [] }
-	}
+    constructor() {
+        super();
+        this.state = {
+            data: []
+        }
+    }
 
-	componentDidMount(){
-      helper.getData()
-          .then(function (res) {
-              this.setState({data: res.data});
-              console.log(this.state.data);
-          }.bind(this))
-
-          .catch(function (err) {
-              console.log(err);
-          }.bind(this));
-  }
-
-
+    componentDidMount() {
+        helper.getData().then(function(res) {
+            this.setState({data: res.data});
+            console.log(this.state.data);
+        }.bind(this)).catch(function(err) {
+            console.log(err);
+        }.bind(this));
+    }
 
     render() {
 
@@ -42,18 +39,18 @@ class TableAppointments extends Component {
                         </tr>
                     </thead>
 
-										<tbody>{this.state.data.map(function() {
+                    <tbody>{this.state.data.map(function() {
 
-							               return (
-							                  <tr key = {this.state.id}>
-							                      <td>{this.state.id}</td>
-							                      <td>{this.state.date}</td>
-							                      <td>{this.state.time}</td>
-							                      <td>{this.state.description}</td>
-							                  </tr>
-							                )
+                            return (
+                                <tr key={this.state.id}>
+                                    <td>{this.state.id}</td>
+                                    <td>{this.state.date}</td>
+                                    <td>{this.state.time}</td>
+                                    <td>{this.state.description}</td>
+                                </tr>
+                            )
 
-							             })}</tbody>
+                        })}</tbody>
                 </Table>
             </div>
         );
