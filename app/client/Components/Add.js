@@ -33,7 +33,6 @@ class Add extends Component {
   }
 
   handleSubmit(event) {
-      event.preventDefault();
       const newAppt = {
           date: this.state.date,
           time: this.state.time,
@@ -42,6 +41,7 @@ class Add extends Component {
       console.log(newAppt);
       helper.saveAppt(newAppt).then(this.props.getData);
       this.setState({ inputValue: "" });
+      window.location.reload();
     }
 
     render() {
