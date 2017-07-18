@@ -7,18 +7,34 @@ import helper from "../utils/api";
 import css from "../../public/css/main.scss";
 
 class TableAppointments extends Component {
-	constructor(){
-			 super();
-	 }
+
+	constructor() {
+			super();
+			this.state = { data: [] }
+	}
+
+	componentDidMount(){
+      helper.getData()
+          .then(function (res) {
+              this.setState({data: res.data});
+              console.log(this.state.data);
+          }.bind(this))
+
+          .catch(function (err) {
+              console.log(err);
+          }.bind(this));
+  }
+
+
 
     render() {
+
         return (
 
             <div className="container">
                 <Table striped bordered condensed hover>
                     <thead>
                         <tr>
-
                             <th>ID</th>
                             <th>Date</th>
                             <th>Time</th>
@@ -26,18 +42,18 @@ class TableAppointments extends Component {
                         </tr>
                     </thead>
 
-										<tbody>
+										<tbody>{this.state.data.map(function() {
 
-										{this.props.results.map(({date, time, description, id}) => (
-												<tr key={ id }>
-														<td>{ date }</td>
-														<td>{ time }</td>
-														<td>{ description }</td>
+							               return (
+							                  <tr key = {this.state.id}>
+							                      <td>{this.state.id}</td>
+							                      <td>{this.state.date}</td>
+							                      <td>{this.state.time}</td>
+							                      <td>{this.state.description}</td>
+							                  </tr>
+							                )
 
-												</tr>
-										))}
-
-										</tbody>
+							             })}</tbody>
                 </Table>
             </div>
         );

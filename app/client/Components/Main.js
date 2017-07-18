@@ -21,18 +21,6 @@ import css from "../../public/css/main.scss";
 
 class Main extends Component {
 
-  componentDidMount(){
-      helper.getData()
-          .then(function (data) {
-              this.setState({data: data.data});
-              //console.log(this.state.data);
-          }.bind(this))
-
-          .catch(function (err) {
-              console.log(err);
-          }.bind(this));
-  }
-  
     render() {
         return (
             <div className="container">
