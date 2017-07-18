@@ -32,12 +32,12 @@ https://admreactappt.herokuapp.com/
 ```
 1. Fork the repo, and Git Clone your forked repo to your desktop.
 2. Open Terminal and navigate to project within your directory.
-3. Once in project, enter 'npm i' to install all node packages used in project.
+3. Once in project, enter 'npm i' in your terminal to install all node packages used in project.
 4. Create database in MySQL and update the json.config to match your credentials. 
    Once app is run, tables will automatically populate in your newly created database.
 5. Once you have completed all steps, you should be good to go! Type 'npm run dev' to 
    kickoff webpack and the server in one command. 
-6. Server will run on localhost://8080.
+6. Server will run on localhost:8080.
 7. Happy contributing!
 
 ```
