@@ -1,33 +1,15 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
 import {Table} from 'react-bootstrap';
-
-import helper from "../utils/api";
-
+import helper from "../utils/api.js";
 import css from "../../public/css/main.scss";
+
+var moment = require("moment");
 
 class TableAppointments extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            data: []
-        }
-    }
-
-    componentDidMount() {
-        helper.getData().then(function(res) {
-            this.setState({data: res.data});
-            console.log(this.state.data);
-        }.bind(this)).catch(function(err) {
-            console.log(err);
-        }.bind(this));
-    }
-
     render() {
-
         return (
-
             <div className="container">
                 <Table striped bordered condensed hover>
                     <thead>
@@ -38,23 +20,22 @@ class TableAppointments extends Component {
                             <th>Description</th>
                         </tr>
                     </thead>
+                    <tbody>
 
-                    <tbody>{this.state.data.map(function() {
+                    {this.props.results.map(({date, time, description, id}) => (
+                        <tr key={ id }>
+                            <td>{ id }</td>
+                            <td>{ moment(date).format("MM-DD-YYYY") }</td>
+                            <td>{ time }</td>
+                            <td>{ description }</td>
 
-                            return (
-                                <tr key={this.state.id}>
-                                    <td>{this.state.id}</td>
-                                    <td>{this.state.date}</td>
-                                    <td>{this.state.time}</td>
-                                    <td>{this.state.description}</td>
-                                </tr>
-                            )
+                        </tr>
+                    ))}
 
-                        })}</tbody>
+                    </tbody>
                 </Table>
             </div>
         );
     }
 }
-
 export default TableAppointments;

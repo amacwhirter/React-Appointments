@@ -9,66 +9,67 @@ import css from "../../public/css/main.scss";
 
 class Search extends React.Component {
 
-  constructor() {
-      super();
+      constructor(){
+          super();
 
-      this.state = {
-          showresult: false,
-          data: []
-      };
+          this.state = {
+              showresult: false,
+              data: []
+          };
 
-      this.getData = this.getData.bind(this);
-      this.showResult = this.showResult.bind(this);
-      this.searchParent = this.searchParent.bind(this);
+          this.getValue = this.getValue.bind(this);
+          this.showResult = this.showResult.bind(this);
+          this.searchParent = this.searchParent.bind(this);
 
-  }
-
-  getData(event) {
-      event.preventDefault();
-
-      var data;
-
-      for (var field in this.refs) {
-          data = this.refs[field].value;
-
-          console.log(data);
-          this.refs[field].value = '';
       }
 
-      helper.getAppointments(data).then(function(res) {
-          this.props.setParent(res.data);
+      getValue(event){
+          event.preventDefault();
 
-          console.log(res.data.length);
+          var data;
 
-          if (res.data.length <= 0) {
-              this.props.found(true);
-              console.log(this.state.data);
-              this.props.setParent(this.state.data);
+          for(var field in this.refs){
+              data = this.refs[field].value;
+
+              console.log(data);
+              this.refs[field].value = '';
           }
-      }.bind(this)).catch(function(err) {
-          console.log(err);
 
-      }.bind(this));
+          helper.getAppointments(data)
+              .then(function (res) {
+                  this.props.setParent(res.data);
 
-  }
+                  console.log(res.data.length);
 
-  showResult() {
-      if (this.state.showresult) {
-          this.setState({showresult: false});
-      } else {
-          this.setState({showresult: true});
+                  if(res.data.length <= 0){
+                      this.props.found(true);
+                      console.log(this.state.data);
+                      this.props.setParent(this.state.data);
+                  }
+              }.bind(this))
+              .catch(function (err) {
+                  console.log(err);
+
+              }.bind(this));
       }
-  }
 
-  componentDidMount() {
-      //this.setState({data: this.props.results});
-      console.log(this.props.results);
-  }
+      showResult(){
+          if(this.state.showresult){
+              this.setState( {showresult: false});
+          } else{
+              this.setState({ showresult: true });
+          }
+      }
 
-  searchParent(data) {
-      this.props.setParent(data);
-      this.setState({data: data});
-  }
+      componentDidMount(){
+          //this.setState({data: this.props.results});
+          console.log(this.props.results);
+      }
+
+      searchParent(data){
+          this.props.setParent(data);
+          this.setState({data: data});
+      }
 
     render() {
         return (
@@ -83,17 +84,16 @@ class Search extends React.Component {
                         : null}
                 </div>
                 <hr />
-                <div className="searchBar">
-                    <FormGroup controlId="formValidationNull" validationState={null}>
-                        <ControlLabel>Search Appointments Here:</ControlLabel>
-                        <FormControl type="text" className="form-control" id="search" placeholder="search by keywords..." ref="search"/>
-                    </FormGroup>
-                    <Button type="submit" className="btn btn-default" onClick={this.getData}>
-                        Search
-                    </Button>
+                <form className="form-inline form-search">
+                    <div className="form-group">
+                        <label htmlFor="exampleInputName2"></label>
+                        <input type="text" className="form-control" id="search" placeholder="search by description..." ref="search" />
 
+                    </div>
+
+                    <button type="submit" className="btn btn-default" onClick={this.getValue} >Search</button>
+                </form>
             </div>
-          </div>
         );
     }
 };

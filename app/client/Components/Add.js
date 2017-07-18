@@ -63,11 +63,11 @@ class Add extends Component {
                 <FormGroup>
                     <InputGroup>
                         <InputGroup.Addon>Description</InputGroup.Addon>
-                        <FormControl type="text" onChange={this.handleInputChangeDesc} value={this.state.inputValue}/>
+                        <FormControl type="text" onChange={this.handleInputChangeDesc} value={this.state.inputValue} placeholder="Enter a description..."/>
                     </InputGroup>
                 </FormGroup>
-                <Button type="submit" className="btn btn-danger" onClick={this.handleSubmit}>
-                    Add
+                <Button type="submit" className="btn btn-success" onClick={this.handleSubmit}>
+                    ADD
                 </Button>
             </div>
         );

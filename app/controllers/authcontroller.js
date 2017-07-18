@@ -1,17 +1,11 @@
 var express = require("express"),
     router = express.Router(),
-    axios = require("axios");
-    path = require("path");
+    axios = require("axios"),
+    path = require("path"),
     db = require("../models");
-
-
-router.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname + "/../public/index.html"));
-});
 
 router.post("/appointment", function (req, res) {
     console.log(req.body);
-
     db.Appointment.create(req.body)
         .then(function (booked) {
             console.log("Data has been posted!!!");
@@ -21,13 +15,10 @@ router.post("/appointment", function (req, res) {
         time:req.body.time,
         description:req.body.description
     };
-
     res.json(data);
 });
 
-
 router.get("/api", function (req, res) {
-
     db.Appointment.findAll({raw : true})
         .then(function (data) {
             console.log(data);
@@ -38,16 +29,12 @@ router.get("/api", function (req, res) {
         });
 });
 
-
 router.get("/api/:search", function (req, res) {
     var des = req.params.search;
-
     console.log(des);
-
-
     db.Appointment.findAll({raw : true,
         where:{
-            description: desc
+            description: des
         }
     })
         .then(function (data) {
@@ -57,6 +44,10 @@ router.get("/api/:search", function (req, res) {
         .catch(function (err) {
             res.json(err);
         });
+});
+
+router.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname + "/../public/index.html"));
 });
 
 module.exports = router;

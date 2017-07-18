@@ -1,5 +1,4 @@
 var axios = require("axios");
-
 var helper = {
     saveAppt: function (data) {
         return axios.post("/appointment", data)
@@ -10,18 +9,11 @@ var helper = {
                 return err;
             });
     },
-
     getData: function () {
         return axios.get('/api')
-            .then(function (response) {
-                return response;
-            })
-            .catch(function (err) {
-                return err;
-            });
     },
 
-    getAppt:function (search) {
+    getAppointments:function (search) {
         return axios.get("/api/" + search)
             .then(function (res) {
                 return res;
@@ -31,5 +23,4 @@ var helper = {
             });
     }
 };
-
 module.exports = helper;
